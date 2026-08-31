@@ -144,8 +144,10 @@ Use the menu option to watch the trained agent play automatically.
 
 The project includes example training clips at the beginning and near the end of a training run:
 
-- [videos/snake_step100000-episode-0.mp4](videos/snake_step100000-episode-0.mp4) — early training demo at step 100000 (begin)
-- [videos/snake_step1000000-episode-0.mp4](videos/snake_step1000000-episode-0.mp4) — final training demo at step 1000000 (final)
+- [videos/snake_step100000-episode-0.mp4](https://github.com/user-attachments/assets/11518bc3-6b26-4125-9247-d263d5b59b04) — early training demo at step 100000 (begin)
+- [videos/snake_step1000000-episode-0.mp4](https://github.com/user-attachments/assets/cca82c45-23fb-44f1-8352-4e683cf2c6de)
+
+ — final training demo at step 1000000 (final)
 
 These videos help show how the agent develops from a beginner strategy to a stronger, more stable game policy.
 
