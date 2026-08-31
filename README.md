@@ -141,13 +141,7 @@ python snake_game.py
 Use the menu option to watch the trained agent play automatically.
 
 ## Demo Training Videos
-
-The project includes example training clips at the beginning and near the end of a training run:
-
-- [videos/snake_step100000-episode-0.mp4](videos/snake_step100000-episode-0.mp4) — early training demo at step 100000 (begin)
-- [videos/snake_step1000000-episode-0.mp4](videos/snake_step1000000-episode-0.mp4) — final training demo at step 1000000 (final)
-
-These videos help show how the agent develops from a beginner strategy to a stronger, more stable game policy.
+- [videos/snake_step1000000-episode-0.gif](videos/snake_step1000000-episode-0.gif) — final training demo at step 1000000 (final)
 
 ## Export for Kaggle or Sharing
 
