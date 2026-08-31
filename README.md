@@ -144,8 +144,13 @@ Use the menu option to watch the trained agent play automatically.
 
 The project includes example training clips at the beginning and near the end of a training run:
 
-- [videos/snake_step100000-episode-0.mp4]<video src="videos/snake_step100000-episode-0.mp4" controls width="600px"></video> — early training demo at step 100000 (begin)
-- [videos/snake_step1000000-episode-0.mp4]<video src="videos/snake_step100000-episode-0.mp4" controls width="600px"></video> — final training demo at step 1000000 (final)
+- **Early training demo at step 100,000 (begin)**
+  <br>
+  <video src="videos/snake_step100000-episode-0.mp4" controls width="600px"></video>
+
+- **Final training demo at step 1,000,000 (final)**
+  <br>
+  <video src="videos/snake_step1000000-episode-0.mp4" controls width="600px"></video>
 
 These videos help show how the agent develops from a beginner strategy to a stronger, more stable game policy.
 
@@ -191,5 +196,3 @@ Then increase timestep count only after the environment is working correctly.
 4. Run a short training session at 100000 steps
 5. Run a longer training session at 1000000 steps
 6. Load the trained model and watch AI gameplay
-
-This is the simplest and most reliable path to getting the project running smoothly.
