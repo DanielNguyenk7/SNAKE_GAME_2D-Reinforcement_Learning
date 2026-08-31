@@ -1,72 +1,195 @@
-# Cartoon-Style Snake Game with Reinforcement Learning
+# Snake Game with Reinforcement Learning
 
-This project implements a Python-based Snake game with a playful, cartoon-style visual identity, paired with a reinforcement learning (RL) pipeline using `gymnasium` and `stable-baselines3`. The system supports both human play and AI play. The training pipeline can run locally (with live rendering) and headlessly (for platforms like Kaggle).
+A cartoon-style Snake game built in Python, with a Gymnasium environment and a reinforcement learning training pipeline using Stable-Baselines3. The project supports:
+
+- Human gameplay
+- AI gameplay using a trained policy
+- Local training with live rendering
+- Headless training for Kaggle or server environments
+- Automatic periodic gameplay video captures
 
 ## Features
 
-* **Cartoon Visuals**: Procedural cartoon graphics including wiggling snake body parts, eyes, and animated food (squash and stretch effects).
-* **Audio**: Basic sound generation using Pygame's sndarray for beep sound effects.
-* **Human Mode**: Play the game manually using keyboard controls.
-* **Gymnasium Environment**: A fully compliant `gymnasium.Env` wrapper (`SnakeEnv`).
-* **RL Pipeline**: Train the Snake agent using PPO via Stable-Baselines3.
-* **Kaggle Mode**: Fully headless training, recording videos of the agent automatically.
+- Cartoon-inspired visuals and dynamic UI
+- Procedural snake, food, and background animations
+- Human mode with keyboard controls
+- Gymnasium-compatible `SnakeEnv` environment for RL training
+- PPO and DQN training support
+- Model checkpointing and best-model saving
+- Video snapshots during training
+
+## Project Structure
+
+```text
+Snake_game/
+├── snake_game.py          # game loop and UI
+├── snake_env.py           # Gymnasium RL environment
+├── train.py               # training script
+├── ui_components.py       # reusable UI widgets and theme
+├── requirements.txt       # Python dependencies
+├── models/                # saved policies, checkpoints, eval logs
+├── videos/                # recorded demo videos
+├── README.md
+├── .gitignore
+└── ...
+```
 
 ## Requirements
 
-Install the dependencies via:
+This project uses Python 3.10+ and requires the packages in `requirements.txt`.
+
+### Install dependencies
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Linux / macOS:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+If `moviepy` or `pygame` gives a dependency issue, reinstall the requirements again after activating the venv:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## How to Play (Human Mode)
+## Run the Game
 
-You can launch the game and select "Human Mode" from the main menu:
+To launch the menu and play manually:
 
 ```bash
 python snake_game.py
 ```
 
-* **Controls**: Arrow keys or W, A, S, D to steer.
-* **P**: Pause/Unpause.
-* **R**: Restart when game over.
-* **ESC**: Return to main menu / Quit.
+### Controls
+
+- Arrow keys or `W`, `A`, `S`, `D`: move
+- `P`: pause / resume
+- `R`: restart after game over
+- `ESC`: return to menu or quit
 
 ## Training the Agent
 
-The training script `train.py` supports two modes.
+The main training script is `train.py`.
 
-### Local Mode (Live Rendering)
-To train the agent locally and watch the game as it learns:
+### 1) Local training (recommended for testing)
+
+This mode uses a single environment and lets you watch training live in the window.
 
 ```bash
 python train.py --mode local --timesteps 100000
 ```
 
-### Kaggle Mode (Headless + Video Recording)
-To train the agent on a headless server like a Kaggle notebook, run:
+This is a good way to check the game runs correctly before a longer training run.
+
+### 2) Full training run
+
+For a larger run, use Kaggle/headless mode or a local machine with more compute:
 
 ```bash
-python train.py --mode kaggle --timesteps 500000
+python train.py --mode kaggle --timesteps 1000000
 ```
 
-* In Kaggle mode, the script forces `SDL_VIDEODRIVER=dummy` and wraps the environment with `RecordVideo` to capture gameplay every 500 episodes into the `videos/` folder.
-* Upon completion, a zipped archive `snake_export.zip` is automatically generated.
+This mode:
 
-## Loading and Watching the AI
+- disables the display driver for headless environments
+- uses multiple environments for faster training
+- saves checkpoints periodically
+- stores the best model in `models/best/`
+- writes checkpoints in `models/checkpoints/`
+- records short gameplay videos to `videos/`
 
-Once a model is trained and `snake_model.zip` is saved in the directory, you can watch the AI play by selecting "Watch AI" from the main menu:
+### 3) Resume training
+
+If you want to continue from an existing model:
+
+```bash
+python train.py --mode kaggle --timesteps 1000000 --resume models/best/best_model.zip
+```
+
+You can also resume from a checkpoint file inside `models/checkpoints/` if you want to continue from a saved training point.
+
+## Model Output Files
+
+The training script generates these outputs:
+
+- `models/best/` — best-performing saved model
+- `models/checkpoints/` — periodic training checkpoints
+- `models/eval_logs/` — evaluation metrics
+- `videos/` — short recorded gameplay clips
+- `tb_logs/` — TensorBoard logs (if enabled)
+
+## Watch the AI Play
+
+Once a trained model is available, launch the game and choose the AI option from the menu.
 
 ```bash
 python snake_game.py
 ```
-*(Press `2` on the menu)*
 
-## Kaggle Export Procedure
+Use the menu option to watch the trained agent play automatically.
 
-The `train.py` script automatically zips the trained `snake_model.zip` and the `videos/` folder into a file named `snake_export.zip` when run in `kaggle` mode.
+## Demo Training Videos
 
-1. Run the training cell in your Kaggle notebook: `!python train.py --mode kaggle`
-2. Once complete, refresh your Kaggle output files pane.
-3. Download the `snake_export.zip` file directly from the Kaggle interface.
-4. Extract locally to review the `.mp4` recordings or run the model using the Human/AI game script.
+The project includes example training clips at the beginning and near the end of a training run:
+
+- [videos/snake_step100000-episode-0.mp4](videos/snake_step100000-episode-0.mp4) — early training demo at step 100000 (begin)
+- [videos/snake_step1000000-episode-0.mp4](videos/snake_step1000000-episode-0.mp4) — final training demo at step 1000000 (final)
+
+These videos help show how the agent develops from a beginner strategy to a stronger, more stable game policy.
+
+## Export for Kaggle or Sharing
+
+In Kaggle/headless mode, the script also creates a zip archive for export:
+
+```bash
+snake_export.zip
+```
+
+This archive contains the model files and training videos so you can download and reuse them elsewhere.
+
+## Common Troubleshooting
+
+### `pygame` or display errors
+
+If the window does not open correctly, make sure your Python environment is active and requirements are installed.
+
+### Headless environment issues
+
+If you are running on a server or notebook without a display, use:
+
+```bash
+python train.py --mode kaggle --timesteps 1000000
+```
+
+### Slow training
+
+Start with a smaller run first:
+
+```bash
+python train.py --mode local --timesteps 100000
+```
+
+Then increase timestep count only after the environment is working correctly.
+
+## Recommended Workflow
+
+1. Create and activate a virtual environment
+2. Install `requirements.txt`
+3. Run the game once in human mode to confirm it works
+4. Run a short training session at 100000 steps
+5. Run a longer training session at 1000000 steps
+6. Load the trained model and watch AI gameplay
+
+This is the simplest and most reliable path to getting the project running smoothly.
