@@ -185,5 +185,3 @@ Then increase timestep count only after the environment is working correctly.
 4. Run a short training session at 100000 steps
 5. Run a longer training session at 1000000 steps
 6. Load the trained model and watch AI gameplay
-
-This is the simplest and most reliable path to getting the project running smoothly.
