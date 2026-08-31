@@ -141,7 +141,7 @@ python snake_game.py
 Use the menu option to watch the trained agent play automatically.
 
 ## Demo Training Videos
-![Training Demo]([videos/snake_step1000000-episode-0.gif](https://github.com/DanielNguyenk7/SNAKE_GAME_2D-Reinforcement_Learning/blob/main/videos/snake_step1000000-episode-0.gif))
+![Training Demo](https://github.com/DanielNguyenk7/SNAKE_GAME_2D-Reinforcement_Learning/blob/main/videos/snake_step1000000-episode-0.gif)
 
 ## Export for Kaggle or Sharing
 
