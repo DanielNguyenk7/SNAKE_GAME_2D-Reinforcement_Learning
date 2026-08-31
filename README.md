@@ -141,7 +141,7 @@ python snake_game.py
 Use the menu option to watch the trained agent play automatically.
 
 ## Demo Training Videos
-- [videos/snake_step1000000-episode-0.gif](videos/snake_step1000000-episode-0.gif) — final training demo at step 1000000 (final)
+![Training Demo](videos/snake_step1000000-episode-0.gif)
 
 ## Export for Kaggle or Sharing
 
